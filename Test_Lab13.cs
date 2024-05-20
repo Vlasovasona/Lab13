@@ -6,34 +6,34 @@ namespace TestLab13
     [TestClass]
     public class Test_Lab13
     {
-        //тестирование конструкторов 
+        //С‚РµСЃС‚РёСЂРѕРІР°РЅРёРµ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂРѕРІ 
         [TestMethod]
-        public void Test_ConstuctorWithoutParams() //тест проверка на создание пустого объекта MyCollection
+        public void Test_ConstuctorWithoutParams() //С‚РµСЃС‚ РїСЂРѕРІРµСЂРєР° РЅР° СЃРѕР·РґР°РЅРёРµ РїСѓСЃС‚РѕРіРѕ РѕР±СЉРµРєС‚Р° MyCollection
         {
             MyCollection<Instrument> collection = new MyCollection<Instrument>();
             Assert.AreEqual(0, collection.Count);
         }
 
         [TestMethod]
-        public void Test_ConstuctorOnlyName() //тест проверка на создание пустого объекта MyCollection
+        public void Test_ConstuctorOnlyName() //С‚РµСЃС‚ РїСЂРѕРІРµСЂРєР° РЅР° СЃРѕР·РґР°РЅРёРµ РїСѓСЃС‚РѕРіРѕ РѕР±СЉРµРєС‚Р° MyCollection
         {
             MyCollection<Instrument> collection = new MyCollection<Instrument>("r");
             Assert.AreEqual("r", collection.NameOfCollection);
         }
 
         [TestMethod]
-        public void Test_Constructor_Length() //проверка конструктора, формаирующего коллекцию по ее длине
+        public void Test_Constructor_Length() //РїСЂРѕРІРµСЂРєР° РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂР°, С„РѕСЂРјР°РёСЂСѓСЋС‰РµРіРѕ РєРѕР»Р»РµРєС†РёСЋ РїРѕ РµРµ РґР»РёРЅРµ
         {
-            MyCollection<Instrument> collection = new MyCollection<Instrument>("w", 5); //создаем коллекцию с помощью ввода ее длины
-            Assert.AreEqual(collection.Count, 5); //проверяем чтобы коллекция содержала 5 элементов
+            MyCollection<Instrument> collection = new MyCollection<Instrument>("w", 5); //СЃРѕР·РґР°РµРј РєРѕР»Р»РµРєС†РёСЋ СЃ РїРѕРјРѕС‰СЊСЋ РІРІРѕРґР° РµРµ РґР»РёРЅС‹
+            Assert.AreEqual(collection.Count, 5); //РїСЂРѕРІРµСЂСЏРµРј С‡С‚РѕР±С‹ РєРѕР»Р»РµРєС†РёСЏ СЃРѕРґРµСЂР¶Р°Р»Р° 5 СЌР»РµРјРµРЅС‚РѕРІ
         }
-        //тестирование конструкторов завершено
+        //С‚РµСЃС‚РёСЂРѕРІР°РЅРёРµ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂРѕРІ Р·Р°РІРµСЂС€РµРЅРѕ
 
-        //тестирование нумератора
+        //С‚РµСЃС‚РёСЂРѕРІР°РЅРёРµ РЅСѓРјРµСЂР°С‚РѕСЂР°
         [TestMethod]
-        public void GetEnumerator_WhenCollectionHasItems_ShouldEnumerateAllItems() //нумератор для коллекции 
+        public void GetEnumerator_WhenCollectionHasItems_ShouldEnumerateAllItems() //РЅСѓРјРµСЂР°С‚РѕСЂ РґР»СЏ РєРѕР»Р»РµРєС†РёРё 
         {
-            MyCollection<Instrument> collection = new MyCollection<Instrument>("w", 1); //создаем коллекцию и заполняем ее элементами
+            MyCollection<Instrument> collection = new MyCollection<Instrument>("w", 1); //СЃРѕР·РґР°РµРј РєРѕР»Р»РµРєС†РёСЋ Рё Р·Р°РїРѕР»РЅСЏРµРј РµРµ СЌР»РµРјРµРЅС‚Р°РјРё
             Instrument tool1 = new Instrument("Q", 1);
             Instrument tool2 = new Instrument("W", 12);
             Instrument tool3 = new Instrument("E", 123);
@@ -55,9 +55,9 @@ namespace TestLab13
         }
 
         [TestMethod]
-        public void GetEnumerator_CollectionHasRemovedElement() //нумератор для коллекции с удаленным элементом
+        public void GetEnumerator_CollectionHasRemovedElement() //РЅСѓРјРµСЂР°С‚РѕСЂ РґР»СЏ РєРѕР»Р»РµРєС†РёРё СЃ СѓРґР°Р»РµРЅРЅС‹Рј СЌР»РµРјРµРЅС‚РѕРј
         {
-            MyCollection<Instrument> collection = new MyCollection<Instrument>("w", 1); //создаем коллекцию и заполняем ее элементами
+            MyCollection<Instrument> collection = new MyCollection<Instrument>("w", 1); //СЃРѕР·РґР°РµРј РєРѕР»Р»РµРєС†РёСЋ Рё Р·Р°РїРѕР»РЅСЏРµРј РµРµ СЌР»РµРјРµРЅС‚Р°РјРё
             Instrument tool1 = new Instrument("Q", 1);
             Instrument tool2 = new Instrument("W", 12);
             Instrument tool3 = new Instrument("E", 123);
@@ -80,13 +80,13 @@ namespace TestLab13
 
             CollectionAssert.AreEqual(new Instrument[] { tool1, tool3 }, result);
         }
-        //тестирование нумератора завершено
+        //С‚РµСЃС‚РёСЂРѕРІР°РЅРёРµ РЅСѓРјРµСЂР°С‚РѕСЂР° Р·Р°РІРµСЂС€РµРЅРѕ
 
-        //тестирование ICollection
+        //С‚РµСЃС‚РёСЂРѕРІР°РЅРёРµ ICollection
         [TestMethod]
-        public void ICollection_CopyTo() // проверка CopyTo 
+        public void ICollection_CopyTo() // РїСЂРѕРІРµСЂРєР° CopyTo 
         {
-            MyCollection<Instrument> collection = new MyCollection<Instrument>("w", 5); //создаем коллекцию и заполняем ее элементами
+            MyCollection<Instrument> collection = new MyCollection<Instrument>("w", 5); //СЃРѕР·РґР°РµРј РєРѕР»Р»РµРєС†РёСЋ Рё Р·Р°РїРѕР»РЅСЏРµРј РµРµ СЌР»РµРјРµРЅС‚Р°РјРё
             Instrument[] list = new Instrument[5];
             collection.CopyTo(list, 0);
             PointHash<Instrument> value = collection.GetFirstValue();
@@ -94,20 +94,20 @@ namespace TestLab13
         }
 
         [TestMethod]
-        public void ICollection_Count() //проверка счетчика элементов
+        public void ICollection_Count() //РїСЂРѕРІРµСЂРєР° СЃС‡РµС‚С‡РёРєР° СЌР»РµРјРµРЅС‚РѕРІ
         {
-            MyCollection<Instrument> collection = new MyCollection<Instrument>("w", 5); //создаем коллекцию и заполняем ее элементами
+            MyCollection<Instrument> collection = new MyCollection<Instrument>("w", 5); //СЃРѕР·РґР°РµРј РєРѕР»Р»РµРєС†РёСЋ Рё Р·Р°РїРѕР»РЅСЏРµРј РµРµ СЌР»РµРјРµРЅС‚Р°РјРё
             Instrument[] list = new Instrument[5];
             collection.CopyTo(list, 0);
             Assert.AreEqual(collection.Count, list.Length);
         }
-        //тестирование ICollection
+        //С‚РµСЃС‚РёСЂРѕРІР°РЅРёРµ ICollection
 
-        //блок Exception 
+        //Р±Р»РѕРє Exception 
         [TestMethod]
-        public void ICollection_CopyTo_ExceptionIndexOutsideOfListLength() //проверка исключения при некорректном вводе индекса при попытке скопирровать значения коллекции в массив
+        public void ICollection_CopyTo_ExceptionIndexOutsideOfListLength() //РїСЂРѕРІРµСЂРєР° РёСЃРєР»СЋС‡РµРЅРёСЏ РїСЂРё РЅРµРєРѕСЂСЂРµРєС‚РЅРѕРј РІРІРѕРґРµ РёРЅРґРµРєСЃР° РїСЂРё РїРѕРїС‹С‚РєРµ СЃРєРѕРїРёСЂСЂРѕРІР°С‚СЊ Р·РЅР°С‡РµРЅРёСЏ РєРѕР»Р»РµРєС†РёРё РІ РјР°СЃСЃРёРІ
         {
-            MyCollection<Instrument> collection = new MyCollection<Instrument>("w", 5); //создаем коллекцию и заполняем ее элементами
+            MyCollection<Instrument> collection = new MyCollection<Instrument>("w", 5); //СЃРѕР·РґР°РµРј РєРѕР»Р»РµРєС†РёСЋ Рё Р·Р°РїРѕР»РЅСЏРµРј РµРµ СЌР»РµРјРµРЅС‚Р°РјРё
             Instrument[] list = new Instrument[5];
             Assert.ThrowsException<Exception>(() =>
             {
@@ -116,9 +116,9 @@ namespace TestLab13
         }
 
         [TestMethod]
-        public void ICollection_CopyTo_ExceptionNotEnoughListLength() //ошибка, когда не хватает места для всех элементов в массиве
+        public void ICollection_CopyTo_ExceptionNotEnoughListLength() //РѕС€РёР±РєР°, РєРѕРіРґР° РЅРµ С…РІР°С‚Р°РµС‚ РјРµСЃС‚Р° РґР»СЏ РІСЃРµС… СЌР»РµРјРµРЅС‚РѕРІ РІ РјР°СЃСЃРёРІРµ
         {
-            MyCollection<Instrument> collection = new MyCollection<Instrument>("w", 5); //создаем коллекцию и заполняем ее элементами
+            MyCollection<Instrument> collection = new MyCollection<Instrument>("w", 5); //СЃРѕР·РґР°РµРј РєРѕР»Р»РµРєС†РёСЋ Рё Р·Р°РїРѕР»РЅСЏРµРј РµРµ СЌР»РµРјРµРЅС‚Р°РјРё
             Instrument[] list = new Instrument[5];
             Assert.ThrowsException<Exception>(() =>
             {
@@ -127,7 +127,7 @@ namespace TestLab13
         }
 
         [TestMethod]
-        public void TestClear() //проверка очистки памяти
+        public void TestClear() //РїСЂРѕРІРµСЂРєР° РѕС‡РёСЃС‚РєРё РїР°РјСЏС‚Рё
         {
             MyCollection<Instrument> collection = new MyCollection<Instrument>("w", 6);
             collection.Clear();
@@ -135,7 +135,7 @@ namespace TestLab13
         }
 
         [TestMethod]
-        public void TestAdd() //проврека добавления элемента
+        public void TestAdd() //РїСЂРѕРІСЂРµРєР° РґРѕР±Р°РІР»РµРЅРёСЏ СЌР»РµРјРµРЅС‚Р°
         {
             // Arrange
             MyCollection<Instrument> collection = new MyCollection<Instrument>("w", 1);
@@ -145,10 +145,10 @@ namespace TestLab13
 
         }
 
-        //ТЕСТЫ ИЗ ВТОРОЙ ЧАСТИ ДЛЯ ПОКРЫТИЯ КЛАССОВ ХЕШ-ТАБЛИЦЫ
-        //блок Exception
+        //РўР•РЎРўР« РР— Р’РўРћР РћР™ Р§РђРЎРўР Р”Р›РЇ РџРћРљР Р«РўРРЇ РљР›РђРЎРЎРћР’ РҐР•РЁ-РўРђР‘Р›РР¦Р«
+        //Р±Р»РѕРє Exception
         [TestMethod]
-        public void Test_CreateTable_Exception() //тестирование ошибки при попытке формирования пустой таблицы
+        public void Test_CreateTable_Exception() //С‚РµСЃС‚РёСЂРѕРІР°РЅРёРµ РѕС€РёР±РєРё РїСЂРё РїРѕРїС‹С‚РєРµ С„РѕСЂРјРёСЂРѕРІР°РЅРёСЏ РїСѓСЃС‚РѕР№ С‚Р°Р±Р»РёС†С‹
         {
             Assert.ThrowsException<Exception>(() =>
             {
@@ -157,7 +157,7 @@ namespace TestLab13
         }
 
         [TestMethod]
-        public void Test_AddExistingElement_Exception() //тестирование ошибки при попытке формирования пустой таблицы
+        public void Test_AddExistingElement_Exception() //С‚РµСЃС‚РёСЂРѕРІР°РЅРёРµ РѕС€РёР±РєРё РїСЂРё РїРѕРїС‹С‚РєРµ С„РѕСЂРјРёСЂРѕРІР°РЅРёСЏ РїСѓСЃС‚РѕР№ С‚Р°Р±Р»РёС†С‹
         {
             MyHashTable<Library_10.Instrument> table = new MyHashTable<Library_10.Instrument>(1);
             Instrument tool = new Instrument("q", 1);
@@ -169,25 +169,25 @@ namespace TestLab13
         }
 
         [TestMethod]
-        public void Test_PrintNullTable_Exception() //тестирование ошибки при попытке печати пустой таблицы
+        public void Test_PrintNullTable_Exception() //С‚РµСЃС‚РёСЂРѕРІР°РЅРёРµ РѕС€РёР±РєРё РїСЂРё РїРѕРїС‹С‚РєРµ РїРµС‡Р°С‚Рё РїСѓСЃС‚РѕР№ С‚Р°Р±Р»РёС†С‹
         {
             MyHashTable<Library_10.Instrument> table = new MyHashTable<Library_10.Instrument>();
             Assert.ThrowsException<Exception>(() =>
             {
                 table.Print();
             });
-        }//блок Exception закончен
+        }//Р±Р»РѕРє Exception Р·Р°РєРѕРЅС‡РµРЅ
 
         [TestMethod]
-        public void TestCreateTable() //тестирование конструктора для создания хеш-таблицы
+        public void TestCreateTable() //С‚РµСЃС‚РёСЂРѕРІР°РЅРёРµ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂР° РґР»СЏ СЃРѕР·РґР°РЅРёСЏ С…РµС€-С‚Р°Р±Р»РёС†С‹
         {
             MyHashTable<Library_10.Instrument> table = new MyHashTable<Library_10.Instrument>(5);
             Assert.AreEqual(table.Capacity, 5);
         }
 
-        //тестривание AddPoint 
+        //С‚РµСЃС‚СЂРёРІР°РЅРёРµ AddPoint 
         [TestMethod]
-        public void TestAddPointToHashTable() //тестирование добавления элемента в таблицу
+        public void TestAddPointToHashTable() //С‚РµСЃС‚РёСЂРѕРІР°РЅРёРµ РґРѕР±Р°РІР»РµРЅРёСЏ СЌР»РµРјРµРЅС‚Р° РІ С‚Р°Р±Р»РёС†Сѓ
         {
             MyHashTable<Library_10.Instrument> table = new MyHashTable<Library_10.Instrument>(5);
             HandTool tool = new HandTool();
@@ -196,7 +196,7 @@ namespace TestLab13
         }
 
         [TestMethod]
-        public void TestAddCount() //тестирование увеличения Count после добавления элемента в таблицу
+        public void TestAddCount() //С‚РµСЃС‚РёСЂРѕРІР°РЅРёРµ СѓРІРµР»РёС‡РµРЅРёСЏ Count РїРѕСЃР»Рµ РґРѕР±Р°РІР»РµРЅРёСЏ СЌР»РµРјРµРЅС‚Р° РІ С‚Р°Р±Р»РёС†Сѓ
         {
             MyHashTable<Library_10.Instrument> table = new MyHashTable<Library_10.Instrument>(5);
             HandTool tool = new HandTool();
@@ -204,9 +204,9 @@ namespace TestLab13
             Assert.AreEqual(6, table.Count);
         }
 
-        //тестиование удаления элемента из таблицы
+        //С‚РµСЃС‚РёРѕРІР°РЅРёРµ СѓРґР°Р»РµРЅРёСЏ СЌР»РµРјРµРЅС‚Р° РёР· С‚Р°Р±Р»РёС†С‹
         [TestMethod]
-        public void TestRemovePointFromHashTableTrue() //тестирование добавления удаления существующего элемента из таблицы
+        public void TestRemovePointFromHashTableTrue() //С‚РµСЃС‚РёСЂРѕРІР°РЅРёРµ РґРѕР±Р°РІР»РµРЅРёСЏ СѓРґР°Р»РµРЅРёСЏ СЃСѓС‰РµСЃС‚РІСѓСЋС‰РµРіРѕ СЌР»РµРјРµРЅС‚Р° РёР· С‚Р°Р±Р»РёС†С‹
         {
             MyHashTable<Library_10.Instrument> table = new MyHashTable<Library_10.Instrument>(1);
             HandTool tool = new HandTool();
@@ -216,7 +216,7 @@ namespace TestLab13
         }
 
         [TestMethod]
-        public void TestRemovePointFromHashTable_False() //тестирование удаления несуществующего элемента из таблицы
+        public void TestRemovePointFromHashTable_False() //С‚РµСЃС‚РёСЂРѕРІР°РЅРёРµ СѓРґР°Р»РµРЅРёСЏ РЅРµСЃСѓС‰РµСЃС‚РІСѓСЋС‰РµРіРѕ СЌР»РµРјРµРЅС‚Р° РёР· С‚Р°Р±Р»РёС†С‹
         {
             MyHashTable<Library_10.Instrument> table = new MyHashTable<Library_10.Instrument>(1);
             HandTool tool = new HandTool();
@@ -226,20 +226,20 @@ namespace TestLab13
         }
 
         [TestMethod]
-        public void TestRemovePointFromHashTable_OutOfKey_False() //тестирование удаления несуществующего элемента из таблицы
+        public void TestRemovePointFromHashTable_OutOfKey_False() //С‚РµСЃС‚РёСЂРѕРІР°РЅРёРµ СѓРґР°Р»РµРЅРёСЏ РЅРµСЃСѓС‰РµСЃС‚РІСѓСЋС‰РµРіРѕ СЌР»РµРјРµРЅС‚Р° РёР· С‚Р°Р±Р»РёС†С‹
         {
             MyHashTable<Library_10.Instrument> table = new MyHashTable<Library_10.Instrument>(1);
-            Instrument tool = new Instrument("Бензопила дружба нового поколения", 9999);
+            Instrument tool = new Instrument("Р‘РµРЅР·РѕРїРёР»Р° РґСЂСѓР¶Р±Р° РЅРѕРІРѕРіРѕ РїРѕРєРѕР»РµРЅРёСЏ", 9999);
             Assert.IsFalse(table.RemoveData(tool));
         }
 
         [TestMethod]
-        public void TestRemovePoint_FromBeginingOfTableTable() //тестирование удаления первого в цепочке элемента из таблицы
+        public void TestRemovePoint_FromBeginingOfTableTable() //С‚РµСЃС‚РёСЂРѕРІР°РЅРёРµ СѓРґР°Р»РµРЅРёСЏ РїРµСЂРІРѕРіРѕ РІ С†РµРїРѕС‡РєРµ СЌР»РµРјРµРЅС‚Р° РёР· С‚Р°Р±Р»РёС†С‹
         {
             MyHashTable<Library_10.Instrument> table = new MyHashTable<Library_10.Instrument>(1);
-            Instrument tool2 = new Instrument("Перфоратор", 98);
-            Instrument tool3 = new Instrument("Штангенциркуль", 85);
-            Instrument tool4 = new Instrument("Микрометр", 41);
+            Instrument tool2 = new Instrument("РџРµСЂС„РѕСЂР°С‚РѕСЂ", 98);
+            Instrument tool3 = new Instrument("РЁС‚Р°РЅРіРµРЅС†РёСЂРєСѓР»СЊ", 85);
+            Instrument tool4 = new Instrument("РњРёРєСЂРѕРјРµС‚СЂ", 41);
             Instrument tool5 = new Instrument("RRR", 1234);
             Instrument tool6 = new Instrument("RRR", 1235);
 
@@ -257,9 +257,9 @@ namespace TestLab13
         }
 
 
-        //тестирование метода Contains
+        //С‚РµСЃС‚РёСЂРѕРІР°РЅРёРµ РјРµС‚РѕРґР° Contains
         [TestMethod]
-        public void TestContainsPointTrue() //метод Contains когда элемент есть в таблице
+        public void TestContainsPointTrue() //РјРµС‚РѕРґ Contains РєРѕРіРґР° СЌР»РµРјРµРЅС‚ РµСЃС‚СЊ РІ С‚Р°Р±Р»РёС†Рµ
         {
             MyHashTable<Library_10.Instrument> table = new MyHashTable<Library_10.Instrument>(1);
             HandTool tool = new HandTool();
@@ -268,16 +268,16 @@ namespace TestLab13
         }
 
         [TestMethod]
-        public void TestContainsPointFalse() //когда элемента нет в таблице
+        public void TestContainsPointFalse() //РєРѕРіРґР° СЌР»РµРјРµРЅС‚Р° РЅРµС‚ РІ С‚Р°Р±Р»РёС†Рµ
         {
             MyHashTable<Library_10.Instrument> table = new MyHashTable<Library_10.Instrument>(1);
             HandTool tool = new HandTool();
             Assert.IsFalse(table.Contains(tool));
         }
 
-        //тестирование ToString для PointHash
+        //С‚РµСЃС‚РёСЂРѕРІР°РЅРёРµ ToString РґР»СЏ PointHash
         [TestMethod]
-        public void TestToStringPoint() //тестирование ToString для класса узла
+        public void TestToStringPoint() //С‚РµСЃС‚РёСЂРѕРІР°РЅРёРµ ToString РґР»СЏ РєР»Р°СЃСЃР° СѓР·Р»Р°
         {
             HandTool tool = new HandTool();
             PointHash<Library_10.Instrument> p = new PointHash<Library_10.Instrument>(tool);
@@ -285,22 +285,22 @@ namespace TestLab13
         }
 
         [TestMethod]
-        public void TestConstructWhithoutParamNext() //конструктор узла без параметров, Next = null
+        public void TestConstructWhithoutParamNext() //РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ СѓР·Р»Р° Р±РµР· РїР°СЂР°РјРµС‚СЂРѕРІ, Next = null
         {
             PointHash<Instrument> p = new PointHash<Instrument>();
             Assert.IsNull(p.Next);
         }
 
         [TestMethod]
-        public void TestConstructWhithoutParamPred() //конструктор узла без параметров, Pred = null
+        public void TestConstructWhithoutParamPred() //РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ СѓР·Р»Р° Р±РµР· РїР°СЂР°РјРµС‚СЂРѕРІ, Pred = null
         {
             PointHash<Instrument> p = new PointHash<Instrument>();
             Assert.IsNull(p.Pred);
         }
 
-        //тестирование методов ToString и GetHashCode для класса PointHash
+        //С‚РµСЃС‚РёСЂРѕРІР°РЅРёРµ РјРµС‚РѕРґРѕРІ ToString Рё GetHashCode РґР»СЏ РєР»Р°СЃСЃР° PointHash
         [TestMethod]
-        public void ToString_WhenDataIsNull_ReturnEmptyString() //конструктор без параметров метод ToString
+        public void ToString_WhenDataIsNull_ReturnEmptyString() //РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ Р±РµР· РїР°СЂР°РјРµС‚СЂРѕРІ РјРµС‚РѕРґ ToString
         {
             PointHash<Instrument> point = new PointHash<Library_10.Instrument>();
             string result = point.ToString();
@@ -318,7 +318,7 @@ namespace TestLab13
         }
 
         [TestMethod]
-        public void GetHashCode_WhenDataIsNull_ReturnZero() //тестирование GetHashCode для узла, созданного с помощью конструктора без параметров
+        public void GetHashCode_WhenDataIsNull_ReturnZero() //С‚РµСЃС‚РёСЂРѕРІР°РЅРёРµ GetHashCode РґР»СЏ СѓР·Р»Р°, СЃРѕР·РґР°РЅРЅРѕРіРѕ СЃ РїРѕРјРѕС‰СЊСЋ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂР° Р±РµР· РїР°СЂР°РјРµС‚СЂРѕРІ
         {
             PointHash<Instrument> point = new PointHash<Library_10.Instrument>();
             int result = point.GetHashCode();
@@ -326,7 +326,7 @@ namespace TestLab13
         }
 
         [TestMethod]
-        public void GetHashCode_WhenDataIsNotNull_ReturnDataHashCode() //тестиование GetHashCode для заполненного узла
+        public void GetHashCode_WhenDataIsNotNull_ReturnDataHashCode() //С‚РµСЃС‚РёРѕРІР°РЅРёРµ GetHashCode РґР»СЏ Р·Р°РїРѕР»РЅРµРЅРЅРѕРіРѕ СѓР·Р»Р°
         {
             Library_10.Instrument tool = new Instrument();
             tool.RandomInit();
@@ -336,7 +336,7 @@ namespace TestLab13
         }
 
         [TestMethod]
-        public void CopyTo() //тестиование GetHashCode для заполненного узла
+        public void CopyTo() //С‚РµСЃС‚РёРѕРІР°РЅРёРµ GetHashCode РґР»СЏ Р·Р°РїРѕР»РЅРµРЅРЅРѕРіРѕ СѓР·Р»Р°
         {
             MyCollection<Instrument> col = new MyCollection<Instrument>("w", 6);
             MyCollection<Instrument> col2 = new MyCollection<Instrument>("w", col);
@@ -345,7 +345,7 @@ namespace TestLab13
         }
 
         [TestMethod]
-        public void CopyTo_Default() //тестиование GetHashCode для заполненного узла
+        public void CopyTo_Default() //С‚РµСЃС‚РёРѕРІР°РЅРёРµ GetHashCode РґР»СЏ Р·Р°РїРѕР»РЅРµРЅРЅРѕРіРѕ СѓР·Р»Р°
         {
             MyCollection<Instrument> col = new MyCollection<Instrument>("w", 1);
             Instrument[] arr = new Instrument[3];
@@ -357,7 +357,7 @@ namespace TestLab13
         }
 
         [TestMethod]
-        public void CopyToCount() //тестиование GetHashCode для заполненного узла
+        public void CopyToCount() //С‚РµСЃС‚РёРѕРІР°РЅРёРµ GetHashCode РґР»СЏ Р·Р°РїРѕР»РЅРµРЅРЅРѕРіРѕ СѓР·Р»Р°
         {
             MyCollection<Instrument> col = new MyCollection<Instrument>("w", 6);
             MyCollection<Instrument> col2 = new MyCollection<Instrument>("w", col);
@@ -366,15 +366,15 @@ namespace TestLab13
         }
 
         [TestMethod]
-        public void Remove_OneElementInChain() //тестиование GetHashCode для заполненного узла
+        public void Remove_OneElementInChain() //С‚РµСЃС‚РёРѕРІР°РЅРёРµ GetHashCode РґР»СЏ Р·Р°РїРѕР»РЅРµРЅРЅРѕРіРѕ СѓР·Р»Р°
         {
             MyCollection<HandTool> col = new MyCollection<HandTool>("w", 1);
             PointHash<HandTool> tool = col.GetFirstValue();
             col.Remove(tool.Data);
-            HandTool tool1 = new HandTool(82, "Штангенциркуль", "Алюминий");
-            HandTool tool2 = new HandTool(12, "Штангенциркуль", "Медь");
-            HandTool tool3 = new HandTool(30, "Углометр", "Резина");
-            HandTool tool4 = new HandTool(53, "Кусачки", "Конструкционная сталь");
+            HandTool tool1 = new HandTool(82, "РЁС‚Р°РЅРіРµРЅС†РёСЂРєСѓР»СЊ", "РђР»СЋРјРёРЅРёР№");
+            HandTool tool2 = new HandTool(12, "РЁС‚Р°РЅРіРµРЅС†РёСЂРєСѓР»СЊ", "РњРµРґСЊ");
+            HandTool tool3 = new HandTool(30, "РЈРіР»РѕРјРµС‚СЂ", "Р РµР·РёРЅР°");
+            HandTool tool4 = new HandTool(53, "РљСѓСЃР°С‡РєРё", "РљРѕРЅСЃС‚СЂСѓРєС†РёРѕРЅРЅР°СЏ СЃС‚Р°Р»СЊ");
 
             col.Add(tool1);
             col.Add(tool2);
@@ -386,7 +386,7 @@ namespace TestLab13
         }
 
         [TestMethod]
-        public void TestIndexGet() //тестирование get индексатора
+        public void TestIndexGet() //С‚РµСЃС‚РёСЂРѕРІР°РЅРёРµ get РёРЅРґРµРєСЃР°С‚РѕСЂР°
         {
             MyCollection<HandTool> col = new MyCollection<HandTool>("w", 1);
             HandTool tool = col.GetFirstValue().Data;
@@ -394,9 +394,9 @@ namespace TestLab13
         }
 
         [TestMethod]
-        public void TestIndexGet_Exception() //тестирование исключение при get индексатора
+        public void TestIndexGet_Exception() //С‚РµСЃС‚РёСЂРѕРІР°РЅРёРµ РёСЃРєР»СЋС‡РµРЅРёРµ РїСЂРё get РёРЅРґРµРєСЃР°С‚РѕСЂР°
         {
-            MyCollection<Instrument> collection = new MyCollection<Instrument>("w", 5); //создаем коллекцию и заполняем ее элементами
+            MyCollection<Instrument> collection = new MyCollection<Instrument>("w", 5); //СЃРѕР·РґР°РµРј РєРѕР»Р»РµРєС†РёСЋ Рё Р·Р°РїРѕР»РЅСЏРµРј РµРµ СЌР»РµРјРµРЅС‚Р°РјРё
             Instrument[] list = new Instrument[5];
             Assert.ThrowsException<Exception>(() =>
             {
@@ -405,9 +405,9 @@ namespace TestLab13
         }
 
         [TestMethod]
-        public void TestIndexSet_Exception() //тестирование исключения в set 
+        public void TestIndexSet_Exception() //С‚РµСЃС‚РёСЂРѕРІР°РЅРёРµ РёСЃРєР»СЋС‡РµРЅРёСЏ РІ set 
         {
-            MyCollection<Instrument> collection = new MyCollection<Instrument>("w", 5); //создаем коллекцию и заполняем ее элементами
+            MyCollection<Instrument> collection = new MyCollection<Instrument>("w", 5); //СЃРѕР·РґР°РµРј РєРѕР»Р»РµРєС†РёСЋ Рё Р·Р°РїРѕР»РЅСЏРµРј РµРµ СЌР»РµРјРµРЅС‚Р°РјРё
             Instrument[] list = new Instrument[5];
             Assert.ThrowsException<Exception>(() =>
             {
@@ -416,7 +416,7 @@ namespace TestLab13
         }
 
         [TestMethod]
-        public void TestIndexSet() //тестиование set 
+        public void TestIndexSet() //С‚РµСЃС‚РёРѕРІР°РЅРёРµ set 
         {
             MyCollection<HandTool> col = new MyCollection<HandTool>("w", 1);
             HandTool tool = col.GetFirstValue().Data;
@@ -425,14 +425,14 @@ namespace TestLab13
         }
 
         [TestMethod]
-        public void IsReadOnly_MyCollection() //тестирование свойства IsReadOnly в MyCollection
+        public void IsReadOnly_MyCollection() //С‚РµСЃС‚РёСЂРѕРІР°РЅРёРµ СЃРІРѕР№СЃС‚РІР° IsReadOnly РІ MyCollection
         {
             MyCollection<HandTool> col = new MyCollection<HandTool>("w", 1);
             Assert.IsFalse(col.IsReadOnly);
         }
 
         [TestMethod]
-        public void Count_MyCollection() //тестирование кол-ва элементов в MyCollection
+        public void Count_MyCollection() //С‚РµСЃС‚РёСЂРѕРІР°РЅРёРµ РєРѕР»-РІР° СЌР»РµРјРµРЅС‚РѕРІ РІ MyCollection
         {
             MyCollection<HandTool> col = new MyCollection<HandTool>("w", 6);
             Assert.AreEqual(col.Count, 6);
@@ -440,42 +440,42 @@ namespace TestLab13
 
 
 
-        //тесты для MyObservableCollection
+        //С‚РµСЃС‚С‹ РґР»СЏ MyObservableCollection
 
         [TestMethod]
-        public void Test_ConstuctorWithoutParams_ObsCol() //тест проверка на создание пустого объекта MyCollection
+        public void Test_ConstuctorWithoutParams_ObsCol() //С‚РµСЃС‚ РїСЂРѕРІРµСЂРєР° РЅР° СЃРѕР·РґР°РЅРёРµ РїСѓСЃС‚РѕРіРѕ РѕР±СЉРµРєС‚Р° MyCollection
         {
             MyObservableCollection<Instrument> collection = new MyObservableCollection<Instrument>();
             Assert.AreEqual(0, collection.Count);
         }
 
         [TestMethod]
-        public void Test_ConstuctorOnlyName_ObsCol() //MyObservableCollection проверка 
+        public void Test_ConstuctorOnlyName_ObsCol() //MyObservableCollection РїСЂРѕРІРµСЂРєР° 
         {
             MyObservableCollection<Instrument> collection = new MyObservableCollection<Instrument>("r");
             Assert.AreEqual("r", collection.NameOfCollection);
         }
 
         [TestMethod]
-        public void Test_Constructor_Length_ObsCol() //MyObservableCollection проверка кол-ва элементов
+        public void Test_Constructor_Length_ObsCol() //MyObservableCollection РїСЂРѕРІРµСЂРєР° РєРѕР»-РІР° СЌР»РµРјРµРЅС‚РѕРІ
         {
-            MyObservableCollection<Instrument> collection = new MyObservableCollection<Instrument>("w", 5); //создаем коллекцию с помощью ввода ее длины
-            Assert.AreEqual(collection.Count, 5); //проверяем чтобы коллекция содержала 5 элементов
+            MyObservableCollection<Instrument> collection = new MyObservableCollection<Instrument>("w", 5); //СЃРѕР·РґР°РµРј РєРѕР»Р»РµРєС†РёСЋ СЃ РїРѕРјРѕС‰СЊСЋ РІРІРѕРґР° РµРµ РґР»РёРЅС‹
+            Assert.AreEqual(collection.Count, 5); //РїСЂРѕРІРµСЂСЏРµРј С‡С‚РѕР±С‹ РєРѕР»Р»РµРєС†РёСЏ СЃРѕРґРµСЂР¶Р°Р»Р° 5 СЌР»РµРјРµРЅС‚РѕРІ
         }
 
         [TestMethod]
-        public void Test_ConstructorCollection() //констуктор MyObservableCollection
+        public void Test_ConstructorCollection() //РєРѕРЅСЃС‚СѓРєС‚РѕСЂ MyObservableCollection
         {
-            MyObservableCollection<Instrument> collection = new MyObservableCollection<Instrument>("w", 5); //создаем коллекцию с помощью ввода ее длины
+            MyObservableCollection<Instrument> collection = new MyObservableCollection<Instrument>("w", 5); //СЃРѕР·РґР°РµРј РєРѕР»Р»РµРєС†РёСЋ СЃ РїРѕРјРѕС‰СЊСЋ РІРІРѕРґР° РµРµ РґР»РёРЅС‹
             MyObservableCollection<Instrument> col2 = new MyObservableCollection<Instrument>("e", collection);
             Assert.AreEqual(collection[2], col2[2]); 
         }
 
-        //тесты для MyObservableCollection закончились
+        //С‚РµСЃС‚С‹ РґР»СЏ MyObservableCollection Р·Р°РєРѕРЅС‡РёР»РёСЃСЊ
         //JournalEntry
 
         [TestMethod]
-        public void CHEA_Constructor()         //CollcetionHandlerEventArgs конструктор
+        public void CHEA_Constructor()         //CollcetionHandlerEventArgs РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
         {
             CollectionHandlerEventArgs<Instrument> item = new CollectionHandlerEventArgs<Instrument>("type", new PointHash<Instrument>());
             Assert.AreEqual(item.TypeOfChanges, "type");
@@ -483,9 +483,9 @@ namespace TestLab13
         }
 
         [TestMethod]
-        public void JournalEntry_Constructor()         //JournalEntry конструктор
+        public void JournalEntry_Constructor()         //JournalEntry РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
         {
-            MyObservableCollection<Instrument> collection = new MyObservableCollection<Instrument>("w", 5); //создаем коллекцию с помощью ввода ее длины
+            MyObservableCollection<Instrument> collection = new MyObservableCollection<Instrument>("w", 5); //СЃРѕР·РґР°РµРј РєРѕР»Р»РµРєС†РёСЋ СЃ РїРѕРјРѕС‰СЊСЋ РІРІРѕРґР° РµРµ РґР»РёРЅС‹
             CollectionHandlerEventArgs<Instrument> ite = new CollectionHandlerEventArgs<Instrument>("type", new PointHash<Instrument>());
             JournalEntry<Instrument> item = new JournalEntry<Instrument>(collection, ite);
             Assert.AreEqual(item.NameOfCollection, "w");
@@ -496,55 +496,55 @@ namespace TestLab13
         [TestMethod]
         public void JournalEntry_ToString()         //JournalEntry ToString
         {
-            MyObservableCollection<Instrument> collection = new MyObservableCollection<Instrument>("w", 5); //создаем коллекцию с помощью ввода ее длины
+            MyObservableCollection<Instrument> collection = new MyObservableCollection<Instrument>("w", 5); //СЃРѕР·РґР°РµРј РєРѕР»Р»РµРєС†РёСЋ СЃ РїРѕРјРѕС‰СЊСЋ РІРІРѕРґР° РµРµ РґР»РёРЅС‹
             CollectionHandlerEventArgs<Instrument> ite = new CollectionHandlerEventArgs<Instrument>("type", new PointHash<Instrument>());
             JournalEntry<Instrument> item = new JournalEntry<Instrument>(collection, ite);
-            Assert.AreEqual(item.ToString(), $"w, изменения типа type элемент {new PointHash<Instrument>(ite.Element.Data).ToString()}");
+            Assert.AreEqual(item.ToString(), $"w, РёР·РјРµРЅРµРЅРёСЏ С‚РёРїР° type СЌР»РµРјРµРЅС‚ {new PointHash<Instrument>(ite.Element.Data).ToString()}");
         }
         //JournalEntry
 
         //Journal 
 
         [TestMethod]
-        public void Journal_Constructor()         //Journal конструктор
+        public void Journal_Constructor()         //Journal РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
         {
             Journal<Instrument> j = new Journal<Instrument>("qq");
             Assert.AreEqual(j.NameOfJournal, "qq");
         }
 
         [TestMethod]
-        public void Journal_CollectionCountChanged_Remove()         //проверка CollectionCountChanged при удалении элемента
+        public void Journal_CollectionCountChanged_Remove()         //РїСЂРѕРІРµСЂРєР° CollectionCountChanged РїСЂРё СѓРґР°Р»РµРЅРёРё СЌР»РµРјРµРЅС‚Р°
         {
             Journal<Instrument> j = new Journal<Instrument>("qq");
-            MyObservableCollection<Instrument> collection = new MyObservableCollection<Instrument>("w", 5); //создаем коллекцию с помощью ввода ее длины
+            MyObservableCollection<Instrument> collection = new MyObservableCollection<Instrument>("w", 5); //СЃРѕР·РґР°РµРј РєРѕР»Р»РµРєС†РёСЋ СЃ РїРѕРјРѕС‰СЊСЋ РІРІРѕРґР° РµРµ РґР»РёРЅС‹
             collection.CollectionCountChanged += j.CollectionCountChanged;
             Instrument tool = collection[2];
             collection.Remove(collection[2]);
-            Assert.AreEqual(j.GetLastNote(), $"w, изменения типа Удаление элемента элемент {tool.ToString()}");
+            Assert.AreEqual(j.GetLastNote(), $"w, РёР·РјРµРЅРµРЅРёСЏ С‚РёРїР° РЈРґР°Р»РµРЅРёРµ СЌР»РµРјРµРЅС‚Р° СЌР»РµРјРµРЅС‚ {tool.ToString()}");
         }
 
         [TestMethod]
-        public void Journal_CollectionCountChanged_Add()         //проверка CollectionCountChanged при добавлении элемента
+        public void Journal_CollectionCountChanged_Add()         //РїСЂРѕРІРµСЂРєР° CollectionCountChanged РїСЂРё РґРѕР±Р°РІР»РµРЅРёРё СЌР»РµРјРµРЅС‚Р°
         {
             Journal<Instrument> j = new Journal<Instrument>("qq");
-            MyObservableCollection<Instrument> collection = new MyObservableCollection<Instrument>("w", 5); //создаем коллекцию с помощью ввода ее длины
+            MyObservableCollection<Instrument> collection = new MyObservableCollection<Instrument>("w", 5); //СЃРѕР·РґР°РµРј РєРѕР»Р»РµРєС†РёСЋ СЃ РїРѕРјРѕС‰СЊСЋ РІРІРѕРґР° РµРµ РґР»РёРЅС‹
             collection.CollectionCountChanged += j.CollectionCountChanged;
             collection.Add(new Instrument());
-            Assert.AreEqual(j.GetLastNote(), $"w, изменения типа Добавление нового элемента элемент {(new Instrument()).ToString()}");
+            Assert.AreEqual(j.GetLastNote(), $"w, РёР·РјРµРЅРµРЅРёСЏ С‚РёРїР° Р”РѕР±Р°РІР»РµРЅРёРµ РЅРѕРІРѕРіРѕ СЌР»РµРјРµРЅС‚Р° СЌР»РµРјРµРЅС‚ {(new Instrument()).ToString()}");
         }
 
         [TestMethod]
-        public void Journal_CollectionReferenceChanged()         //проверка CollectionReferenceChanged при изменении элемента
+        public void Journal_CollectionReferenceChanged()         //РїСЂРѕРІРµСЂРєР° CollectionReferenceChanged РїСЂРё РёР·РјРµРЅРµРЅРёРё СЌР»РµРјРµРЅС‚Р°
         {
             Journal<Instrument> j = new Journal<Instrument>("qq");
-            MyObservableCollection<Instrument> collection = new MyObservableCollection<Instrument>("w", 5); //создаем коллекцию с помощью ввода ее длины
+            MyObservableCollection<Instrument> collection = new MyObservableCollection<Instrument>("w", 5); //СЃРѕР·РґР°РµРј РєРѕР»Р»РµРєС†РёСЋ СЃ РїРѕРјРѕС‰СЊСЋ РІРІРѕРґР° РµРµ РґР»РёРЅС‹
             collection.CollectionReferenceChanged += j.CollectionReferenceChanged;
             collection[2] = new Instrument("ee", 12);
-            Assert.AreEqual($"w, изменения типа Изменение элемента элемент {(new Instrument("ee", 12)).ToString()}", j.GetLastNote());
+            Assert.AreEqual($"w, РёР·РјРµРЅРµРЅРёСЏ С‚РёРїР° РР·РјРµРЅРµРЅРёРµ СЌР»РµРјРµРЅС‚Р° СЌР»РµРјРµРЅС‚ {(new Instrument("ee", 12)).ToString()}", j.GetLastNote());
         }
 
         [TestMethod]
-        public void Journal_WriteNotes() //проверка исключения при попытке напечатать пустой журнал
+        public void Journal_WriteNotes() //РїСЂРѕРІРµСЂРєР° РёСЃРєР»СЋС‡РµРЅРёСЏ РїСЂРё РїРѕРїС‹С‚РєРµ РЅР°РїРµС‡Р°С‚Р°С‚СЊ РїСѓСЃС‚РѕР№ Р¶СѓСЂРЅР°Р»
         {
             Journal<Instrument> j = new Journal<Instrument>("q");
             Assert.ThrowsException<Exception>(() =>
