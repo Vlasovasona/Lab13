@@ -1,10 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Library_10;
 using System.Collections;
+using System.Data;
 
 namespace Lab_13
 {
@@ -167,41 +168,19 @@ namespace Lab_13
                 }
             }
         }
+        public int IndexOf(T item) //метод, который возвращает порядковый номер (индекс для элемента, введенного пользователем для замены)
+        { 
+            int index = 0; //устанавливаем начальное значение индекса 0
+            foreach (T element in this) //с помощью цикла перебыриаем элементы коллекции в попытке найти введеный элемент
+            {
+                if (element.Equals(item))
+                {
+                    return index; //как только нашли элемент возвращаем его индекс
+                }
+                index++; //увеличиваем на единицу значение индеса если мы не нашли элемент
+            }
+            throw new Exception("Элемент не найден"); 
+        }
     }
 }
-
-//public T this[string key]
-//{
-//    get
-//    {
-//        foreach (T item in this)
-//        {
-//            Instrument tool = (Instrument)(object)item;
-//            if (tool.Name == key)
-//            {
-//                return item;
-//            }
-//        }
-//        throw new KeyNotFoundException();
-//    }
-//    set
-//    {
-//        bool keyFound = false;
-//        foreach (var item in this)
-//        {
-//            Instrument tool = (Instrument)(object)item;
-//            if (tool.Name == key)
-//            {
-//                keyFound = true;
-//                Add(value); // Здесь можно изменить поведение при установке значения по индексу
-//                break;
-//            }
-//        }
-
-//        if (!keyFound)
-//        {
-//            throw new KeyNotFoundException();
-//        }
-//    }
-//}
 
