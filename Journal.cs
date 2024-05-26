@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -16,17 +16,25 @@ namespace Lab_13
         public string NameOfCollection { get; set; } // Имя коллекции, в которой произошли изменения
         public string TypeOfChanges { get; set; } // Тип произошедших изменений
         public string Element { get; set; } // Элемент, над которым произошли изменения
+        public string NewElement { get; set; } // в случае если элемент был заменен, сохраняем новое значение
 
-        public JournalEntry(object source, CollectionHandlerEventArgs<T> e)        // Конструктор класса для инициализации полей
+        public JournalEntry(object source, CollectionHandlerEventArgs<T> e)
         {
             NameOfCollection = ((MyCollection<T>)source).NameOfCollection;
             TypeOfChanges = e.TypeOfChanges;
             Element = new PointHash<T>(e.Element.Data).ToString();
+            if (e.NewElement != null)
+            {
+                NewElement = new PointHash<T>(e.NewElement.Data).ToString();
+            }
+            else NewElement = null;
         }
 
         public string ToString()        // Переопределенный метод ToString для возвращения строкового представления записи журнала
         {
-            return $"{NameOfCollection}, изменения типа {TypeOfChanges} элемент {Element}";
+            if (NewElement == null)
+                return $"В коллекции {NameOfCollection}, {TypeOfChanges} элемент {Element}";
+            else return $"В коллекции {NameOfCollection}, элемент {Element} {TypeOfChanges} на {NewElement}";
         }
     }
 
@@ -68,7 +76,10 @@ namespace Lab_13
             if (arr.Count == 0) throw new Exception("Журнал пустой");
             foreach (var entry in arr)
             {
-                Console.WriteLine($"{NameOfJournal}. Изменения типа {entry.TypeOfChanges} в элементе {entry.Element}. {entry.NameOfCollection}");
+                if (entry.NewElement == null)
+                    Console.WriteLine($"Журнал: {NameOfJournal}. В хеш-таблице(-у) {entry.NameOfCollection} {entry.TypeOfChanges} элемент {entry.Element}.");
+                else
+                    Console.WriteLine($"Журнал: {NameOfJournal}. В хеш-таблице(-у) {entry.NameOfCollection} {entry.TypeOfChanges} элемент {entry.Element} на {entry.NewElement}");
             }
         }
     }
