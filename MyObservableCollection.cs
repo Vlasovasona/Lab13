@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,24 +25,24 @@ namespace Lab_13
 
         public void OnCollectionCountChanged(object source, CollectionHandlerEventArgs<T> e)        // Метод для вызова события CollectionCountChanged
         {
-            CollectionCountChanged?.Invoke(this, e);
+            CollectionCountChanged?.Invoke(source, e);
         }
 
         public void OnCollectionReferenceChanged(object source, CollectionHandlerEventArgs<T> e)        // Метод для вызова события CollectionReferenceChanged
         {
-            CollectionReferenceChanged?.Invoke(this, e);
+            CollectionReferenceChanged?.Invoke(source, e);
         }
 
         public void Add(T item)        // Переопределение метода Add для добавления нового элемента в коллекцию
         {
             base.Add(item);
-            OnCollectionCountChanged(this, new CollectionHandlerEventArgs<T>("Добавление нового элемента", new PointHash<T>(item)));
+            OnCollectionCountChanged(this, new CollectionHandlerEventArgs<T>("добавлен новый", new PointHash<T>(item), null));
         }
 
         public void Remove(T item)        // Переопределение метода Remove для удаления элемента из коллекции
         {
             base.Remove(item);
-            OnCollectionCountChanged(this, new CollectionHandlerEventArgs<T>("Удаление элемента", new PointHash<T>(item)));
+            OnCollectionCountChanged(this, new CollectionHandlerEventArgs<T>("удален", new PointHash<T>(item), null));
         }
 
         public T this[int index] // Переопределение индексатора для доступа и обновления элементов коллекции
@@ -50,9 +50,13 @@ namespace Lab_13
             get { return base[index]; }
             set
             {
-                if (base[index].Equals(value)) return;
-                base[index] = value;
-                OnCollectionReferenceChanged(this, new CollectionHandlerEventArgs<T>("Изменение элемента", new PointHash<T>(value)));
+                if (this.Contains(value)) throw new Exception("Невозможно добавить элемент, который уже находится в коллекции");
+                else
+                {
+                    T tool = base[index];
+                    base[index] = value;
+                    OnCollectionReferenceChanged(this, new CollectionHandlerEventArgs<T>("изменен", new PointHash<T>(tool), new PointHash<T>(value)));
+                }
             }
         }
     }
