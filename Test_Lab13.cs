@@ -1,12 +1,14 @@
 using Library_10;
 using Lab_13;
+using Microsoft.VisualStudio.TestPlatform.Utilities;
+using System.Collections.ObjectModel;
 
 namespace TestLab13
 {
     [TestClass]
     public class Test_Lab13
     {
-        //тестирование конструкторов 
+        //тестирование конструкторов
         [TestMethod]
         public void Test_ConstuctorWithoutParams() //тест проверка на создание пустого объекта MyCollection
         {
@@ -103,7 +105,7 @@ namespace TestLab13
         }
         //тестирование ICollection
 
-        //блок Exception 
+        //блок Exception
         [TestMethod]
         public void ICollection_CopyTo_ExceptionIndexOutsideOfListLength() //проверка исключения при некорректном вводе индекса при попытке скопирровать значения коллекции в массив
         {
@@ -137,7 +139,6 @@ namespace TestLab13
         [TestMethod]
         public void TestAdd() //проврека добавления элемента
         {
-            // Arrange
             MyCollection<Instrument> collection = new MyCollection<Instrument>("w", 1);
             Instrument t = new Instrument();
             collection.Add(t);
@@ -185,7 +186,7 @@ namespace TestLab13
             Assert.AreEqual(table.Capacity, 5);
         }
 
-        //тестривание AddPoint 
+        //тестривание AddPoint
         [TestMethod]
         public void TestAddPointToHashTable() //тестирование добавления элемента в таблицу
         {
@@ -468,7 +469,7 @@ namespace TestLab13
         {
             MyObservableCollection<Instrument> collection = new MyObservableCollection<Instrument>("w", 5); //создаем коллекцию с помощью ввода ее длины
             MyObservableCollection<Instrument> col2 = new MyObservableCollection<Instrument>("e", collection);
-            Assert.AreEqual(collection[2], col2[2]); 
+            Assert.AreEqual(collection[2], col2[2]);
         }
 
         //тесты для MyObservableCollection закончились
@@ -477,7 +478,7 @@ namespace TestLab13
         [TestMethod]
         public void CHEA_Constructor()         //CollcetionHandlerEventArgs конструктор
         {
-            CollectionHandlerEventArgs<Instrument> item = new CollectionHandlerEventArgs<Instrument>("type", new PointHash<Instrument>());
+            CollectionHandlerEventArgs<Instrument> item = new CollectionHandlerEventArgs<Instrument>("type", new PointHash<Instrument>(), null);
             Assert.AreEqual(item.TypeOfChanges, "type");
             Assert.AreEqual(item.Element.Data, (new PointHash<Instrument>()).Data);
         }
@@ -486,7 +487,7 @@ namespace TestLab13
         public void JournalEntry_Constructor()         //JournalEntry конструктор
         {
             MyObservableCollection<Instrument> collection = new MyObservableCollection<Instrument>("w", 5); //создаем коллекцию с помощью ввода ее длины
-            CollectionHandlerEventArgs<Instrument> ite = new CollectionHandlerEventArgs<Instrument>("type", new PointHash<Instrument>());
+            CollectionHandlerEventArgs<Instrument> ite = new CollectionHandlerEventArgs<Instrument>("type", new PointHash<Instrument>(), null);
             JournalEntry<Instrument> item = new JournalEntry<Instrument>(collection, ite);
             Assert.AreEqual(item.NameOfCollection, "w");
             Assert.AreEqual(item.TypeOfChanges, ite.TypeOfChanges);
@@ -497,13 +498,13 @@ namespace TestLab13
         public void JournalEntry_ToString()         //JournalEntry ToString
         {
             MyObservableCollection<Instrument> collection = new MyObservableCollection<Instrument>("w", 5); //создаем коллекцию с помощью ввода ее длины
-            CollectionHandlerEventArgs<Instrument> ite = new CollectionHandlerEventArgs<Instrument>("type", new PointHash<Instrument>());
+            CollectionHandlerEventArgs<Instrument> ite = new CollectionHandlerEventArgs<Instrument>("type", new PointHash<Instrument>(), null);
             JournalEntry<Instrument> item = new JournalEntry<Instrument>(collection, ite);
-            Assert.AreEqual(item.ToString(), $"w, изменения типа type элемент {new PointHash<Instrument>(ite.Element.Data).ToString()}");
+            Assert.AreEqual(item.ToString(), $"В коллекции w, type элемент {new PointHash<Instrument>(ite.Element.Data).ToString()}");
         }
         //JournalEntry
 
-        //Journal 
+        //Journal
 
         [TestMethod]
         public void Journal_Constructor()         //Journal конструктор
@@ -520,7 +521,7 @@ namespace TestLab13
             collection.CollectionCountChanged += j.CollectionCountChanged;
             Instrument tool = collection[2];
             collection.Remove(collection[2]);
-            Assert.AreEqual(j.GetLastNote(), $"w, изменения типа Удаление элемента элемент {tool.ToString()}");
+            Assert.AreEqual(j.GetLastNote(), $"В коллекции w, удален элемент {tool.ToString()}");
         }
 
         [TestMethod]
@@ -530,7 +531,7 @@ namespace TestLab13
             MyObservableCollection<Instrument> collection = new MyObservableCollection<Instrument>("w", 5); //создаем коллекцию с помощью ввода ее длины
             collection.CollectionCountChanged += j.CollectionCountChanged;
             collection.Add(new Instrument());
-            Assert.AreEqual(j.GetLastNote(), $"w, изменения типа Добавление нового элемента элемент {(new Instrument()).ToString()}");
+            Assert.AreEqual(j.GetLastNote(), $"В коллекции w, добавлен новый элемент {(new Instrument()).ToString()}");
         }
 
         [TestMethod]
@@ -539,8 +540,10 @@ namespace TestLab13
             Journal<Instrument> j = new Journal<Instrument>("qq");
             MyObservableCollection<Instrument> collection = new MyObservableCollection<Instrument>("w", 5); //создаем коллекцию с помощью ввода ее длины
             collection.CollectionReferenceChanged += j.CollectionReferenceChanged;
-            collection[2] = new Instrument("ee", 12);
-            Assert.AreEqual($"w, изменения типа Изменение элемента элемент {(new Instrument("ee", 12)).ToString()}", j.GetLastNote());
+            Instrument t = (Instrument)collection[2].Clone();
+            Instrument toolNew = new Instrument("ee", 12);
+            collection[2] = toolNew;
+            Assert.AreEqual($"В коллекции w, элемент {t.ToString()} изменен на {toolNew.ToString()}", j.GetLastNote());
         }
 
         [TestMethod]
@@ -551,6 +554,116 @@ namespace TestLab13
             {
                 j.WriteNotes();
             });
+        }
+
+        //добавленные тесты
+        [TestMethod]
+        public void MyCollection_IndexOf_Exceptin() //проверка исключения при попытке получить индекс несуществующего в коллекции элемента
+        {
+            MyCollection<Instrument> col = new MyCollection<Instrument>("q", 2);
+            Instrument tool = new Instrument();
+            Assert.ThrowsException<Exception>(() =>
+            {
+                col.IndexOf(tool);
+            });
+        }
+
+        [TestMethod]
+        public void CollectionCountChangedEvent() 
+        {
+            MyObservableCollection<Instrument> col = new MyObservableCollection<Instrument>("q", 5);
+            Instrument tool = new Instrument("TOOL", 1);
+            bool Event = false;
+            col.Add(tool);
+            col.CollectionCountChanged += (source, e) =>
+            {
+                Event = true;
+                Assert.AreEqual("добавлен новый", e.TypeOfChanges);
+                Assert.AreEqual(tool, e.Element.Data);
+            };
+        }
+
+        [TestMethod]
+        public void CollectionReferenceChangedEvent()
+        {
+            MyObservableCollection<Instrument> col = new MyObservableCollection<Instrument>("q", 5);
+            Instrument tool = new Instrument("TOOL", 1);
+            bool Event = false;
+            col[2] = tool;
+            col.CollectionReferenceChanged += (source, e) =>
+            {
+                Event = true;
+                Assert.AreEqual("изменен", e.TypeOfChanges);
+                Assert.AreEqual(tool, e.Element.Data);
+            };
+        }
+
+        [TestMethod]
+        public void Index_MyOC_Exception() //проверка исключения в индексаторе
+        {
+            MyCollection<Instrument> col = new MyCollection<Instrument>("q", 5);
+            Instrument tool = new Instrument();
+            col[1] = tool;
+            Assert.ThrowsException<Exception>(() =>
+            {
+                col[3] = tool;
+            });
+        }
+
+        [TestMethod]
+        public void WriteNotes_WhenEmptyJournal_ThrowsException() //проверка ошибки при попытке печати пустого журнала
+        {
+            Journal<Instrument> journal = new Journal<Instrument>("Test Journal");
+            Assert.ThrowsException<Exception>(() => journal.WriteNotes());
+        }
+
+        [TestMethod]
+        public void Print_Journal() //метод проверки печати в случае изменения элемента
+        {
+            Instrument tool = new Instrument();
+            Journal<Instrument> journal = new Journal<Instrument>("Test Journal");
+
+            MyObservableCollection<Instrument> myCollection = new MyObservableCollection<Instrument>("q",4); 
+            CollectionHandlerEventArgs<Instrument> eventArgs = new CollectionHandlerEventArgs<Instrument>("изменен", new PointHash<Instrument>(tool), new PointHash<Instrument>()); //Искусственне
+
+            journal.CollectionReferenceChanged(myCollection, eventArgs); //Вызываюн метод, который обрабатывает событие в классе Journal
+
+            var consoleOutput = ConsoleOutput(() => { journal.WriteNotes(); });
+
+            Assert.IsTrue(consoleOutput.Contains($"Журнал: Test Journal. В хеш-таблице(-у) q изменен элемент {tool} на ")); //Метод Print Journal, печать журнала с записями
+        }
+
+        // Приватний метод CaptureConsoleOutput принимает делегат Action в качестве параметра
+
+        private string ConsoleOutput(Action action) //вспомогательным метод для тестов проверки печати
+
+        {
+            // Создается новый StringWriter, который будет использоваться для перехвата вывода консоли
+            // StringWriter это обертка над StringBuilder для записи символов в поток строк
+            using (var consoleOutput = new StringWriter())
+            {
+                // Устанавливается consoleOutput как поток вывода консоли, чтобы перехватить вывод этой консоли
+                Console.SetOut(consoleOutput);
+                // Выполняется переданное действие (action), которое содержит операции вывода информации в консоль
+                action.Invoke();
+                return consoleOutput.ToString();
+            }
+        }
+
+        [TestMethod]
+        public void Print_Journal_Test2() //тестирование вывода на печать сообзения о добавлении
+        {
+            Instrument tool = new Instrument();
+            Journal<Instrument> journal = new Journal<Instrument>("Test Journal");
+
+            MyObservableCollection<Instrument> myCollection = new MyObservableCollection<Instrument>("q", 4);
+            CollectionHandlerEventArgs<Instrument> eventArgs = new CollectionHandlerEventArgs<Instrument>("добавлен", new PointHash<Instrument>(tool), null); //Искусственне
+
+            journal.CollectionCountChanged(myCollection, eventArgs); //Вызываюн метод, который обрабатывает событие в классе Journal
+
+            var consoleOutput = ConsoleOutput(() => { journal.WriteNotes(); });
+
+            Assert.IsTrue(consoleOutput.Contains($"Журнал: Test Journal. В хеш-таблице(-у) q добавлен элемент {tool}")); //Метод Print Journal, печать журнала с записями
         }
     }
 }
