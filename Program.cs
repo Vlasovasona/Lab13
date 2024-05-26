@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Diagnostics.Metrics;
 using Library_10;
 using System.Collections.Generic;
@@ -53,7 +53,7 @@ namespace Lab_13
             tool.Init();
             if (table.Contains(tool))
             {
-                table.RemoveData(tool);
+                table.Remove(tool); //здесь был вызван метод RemoveData, нужно было Remove, по этой причине не записывалась информация про удаление элемента в журнал
                 if (table.Count == 0) Console.WriteLine("В ходе удаления была получена пустая таблица");
             }
             else
@@ -79,10 +79,18 @@ namespace Lab_13
         static void ChangeData(MyObservableCollection<HandTool> collection)
         {
             if (collection.Count <= 0 || collection == null) throw new Exception("Таблица пустая или не создана");
-            int index = InputIntNumber("Введите номер элемента, который вы хотите заменить");
             HandTool tool = new HandTool();
-            tool.RandomInit();
-            collection[index-1] = tool;
+            Console.WriteLine("Введите элемент, который нужно заменить");
+            tool.Init();
+            if (collection.Contains(tool))
+            {
+                Console.WriteLine("Введите элемент для замены");
+                HandTool tool2 = new HandTool();
+                tool2.Init();
+                collection[collection.IndexOf(tool)] = tool2; //сначала вводим элемент, который нужно заменить, затем метод IndexOf находит его индекс в коллекции и тогда вызывается индексатор от найденного индекса
+                Console.WriteLine($"Замена элемента {tool} на элемент {tool2} прошла успешно!");
+            }
+            else throw new Exception("Элемент для замены не найден");
         }
 
         static void CreateCollection(ref MyObservableCollection<HandTool> collection, string name)
@@ -103,22 +111,24 @@ namespace Lab_13
             sbyte answer1; //объявление переменных, которые отвечают за выбранный пункт меню
             do
             {
-                Console.WriteLine("\n1. Сформировать хеш-таблицу с помощью ввода длины");
+                Console.WriteLine("1. Сформировать 1 хеш-таблицу с помощью ввода длины");
+                Console.WriteLine("2. Сформировать 2 хеш-таблицу с помощью ввода длины");
 
                 Console.WriteLine("\nДействия с первой коллекцией:");
-                Console.WriteLine("2. Добавить элемент в первую коллекцию");
-                Console.WriteLine("3. Удалить элемент из первой коллекции");
-                Console.WriteLine("4. Присвоить новое значение какому-нибудь элементу первой коллекции");
-                Console.WriteLine("5. Вывести первую коллекцию");
+                Console.WriteLine("3. Добавить элемент в первую коллекцию");
+                Console.WriteLine("4. Удалить элемент из первой коллекции");
+                Console.WriteLine("5. Присвоить новое значение какому-нибудь элементу первой коллекции");
+                Console.WriteLine("6. Вывести первую коллекцию");
 
                 Console.WriteLine("\nДействия со второй коллекцией:");
-                Console.WriteLine("6. Добавить элемент во вторую коллекцию");
-                Console.WriteLine("7. Удалить элемент из второй коллекции");
-                Console.WriteLine("8. Присвоить новое значение какому-нибудь элементу второй коллекции");
-                Console.WriteLine("9. Вывести вторую коллекцию");
-                Console.WriteLine("10. Вывести журналы");
+                Console.WriteLine("7. Добавить элемент во вторую коллекцию");
+                Console.WriteLine("8. Удалить элемент из второй коллекции");
+                Console.WriteLine("9. Присвоить новое значение какому-нибудь элементу второй коллекции");
+                Console.WriteLine("10. Вывести вторую коллекцию");
+                Console.WriteLine("11. Вывести журналы");
 
-                Console.WriteLine("\n11. Завершить работу программы");
+                Console.WriteLine("\n12. Завершить работу программы");
+                Console.WriteLine("___________________________________________________________________________________________");
 
                 answer1 = InputSbyteNumber();
 
@@ -129,12 +139,23 @@ namespace Lab_13
                             try
                             {
                                 CreateCollection(ref col1, "Первая коллекция");
-                                CreateCollection(ref col2, "Вторая коллекция");
 
                                 col1.CollectionCountChanged += j1.CollectionCountChanged;
                                 col1.CollectionReferenceChanged += j1.CollectionReferenceChanged;
-
                                 col1.CollectionReferenceChanged += j2.CollectionReferenceChanged;
+                            }
+                            catch (Exception e)
+                            {
+                                Console.WriteLine($"Выполнение провалено: {e.Message}");
+                            }
+                            break;
+                        }
+                    case 2:
+                        {
+                            try
+                            {
+                                CreateCollection(ref col2, "Вторая коллекция");
+
                                 col2.CollectionReferenceChanged += j2.CollectionReferenceChanged;
                             }
                             catch (Exception e)
@@ -143,7 +164,7 @@ namespace Lab_13
                             }
                             break;
                         }
-                    case 2: //добавить элемент в первую
+                    case 3: //добавить элемент в первую
                         {
                             try
                             {
@@ -155,7 +176,7 @@ namespace Lab_13
                             }
                             break;
                         }
-                    case 3: //удаление элемента первой коллекции
+                    case 4: //удаление элемента первой коллекции
                         {
                             try
                             {
@@ -167,7 +188,7 @@ namespace Lab_13
                             }
                             break;
                         }
-                    case 4: //изменение значения элемента первой коллекции
+                    case 5: //изменение значения элемента первой коллекции
                         {
                             try
                             {
@@ -179,7 +200,7 @@ namespace Lab_13
                             }
                             break;
                         }
-                    case 5: //вывод на экран первой коллекции
+                    case 6: //вывод на экран первой коллекции
                         {
                             try
                             {
@@ -192,7 +213,7 @@ namespace Lab_13
                             }
                             break;
                         }
-                    case 6: //добавить элемент во вторую коллекцию
+                    case 7: //добавить элемент во вторую коллекцию
                         {
                             try
                             {
@@ -204,7 +225,7 @@ namespace Lab_13
                             }
                             break;
                         }
-                    case 7: //удалить элемент из второй коллекции
+                    case 8: //удалить элемент из второй коллекции
                         {
                             try
                             {
@@ -216,7 +237,7 @@ namespace Lab_13
                             }
                             break;
                         }
-                    case 8: //присвоить новое значение элементу из второй коллекции
+                    case 9: //присвоить новое значение элементу из второй коллекции
                         {
                             try
                             {
@@ -228,7 +249,7 @@ namespace Lab_13
                             }
                             break;
                         }
-                    case 9: //вывести вторую коллекцию
+                    case 10: //вывести вторую коллекцию
                         {
                             try
                             {
@@ -240,11 +261,18 @@ namespace Lab_13
                             }
                             break;
                         }
-                    case 10: //проверить содержится ли элемент в коллекции
+                    case 11: //проверить содержится ли элемент в коллекции
                         {
                             try
                             {
                                 j1.WriteNotes();
+                            }
+                            catch (Exception e)
+                            {
+                                Console.WriteLine($"Выполнение провалено: {e.Message}");
+                            }
+                            try
+                            {
                                 j2.WriteNotes();
                             }
                             catch (Exception e)
@@ -253,7 +281,7 @@ namespace Lab_13
                             }
                             break;
                         }
-                    case 11: //завершение работы программы
+                    case 12: //завершение работы программы
                         {
                             Console.WriteLine("Демонстрация завершена");
                             break;
@@ -264,7 +292,7 @@ namespace Lab_13
                             break;
                         }
                 }
-            } while (answer1 != 10);
+            } while (answer1 != 12);
 
         }
     }
